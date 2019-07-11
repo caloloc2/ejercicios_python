@@ -3,7 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 #%matplotlib inline
 
-
 def string_difference(target, test):
     match_pattern = zip(target, test)  #give list of tuples (of letters at each index)
     difference = sum(1 for e in match_pattern if e[0] != e[1])  #count tuples with non matching elements
