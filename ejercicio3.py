@@ -30,8 +30,8 @@ def mutate(individual, target, letters):
             individual = individual[0:i] + li + individual[i+1:]
     return(individual)
 
-def procesar(target, repeticiones, tipo):
-    ind_size = len(target)
+def procesar(target, palabra, repeticiones, ind_size):
+    #ind_size = len(target)
     n_ind = 1
 
     letter_pool = np.array(list(range(32,127)), dtype='int8')  # Genetic pool
@@ -45,32 +45,24 @@ def procesar(target, repeticiones, tipo):
     best_individual, best_fit
 
     for i in range(repeticiones):
-        if (tipo==1):
-            print(best_individual, best_fit)
+        print(best_individual, best_fit)
         best_individual = mutate(best_individual, target, letter_pool)
         best_fit = similarity(target, best_individual)
-
-    if (tipo==0):
-        print(best_individual, best_fit)
         
 ## lee los parametros ingresados desde consola
-## python ejercicio3.py 'texto a procesar' numero_de_repeticiones tipo_de_salida
-## 'texto a procesar' ==> cualquier texto que se desee analizar
-## numero_de_repeticiones ==> numero entero para el numero de repeticiones
-## tipo_de_salida ===>  1: muestra todos los textos generados, 0:muestra solo el texto con el mayor valor
+## python ejercicio3.py archivo_txt start_word sentence_length n_rep
+## 'texto a procesar'
+## start_word
+## sentence_length
+## n_rep
 
-if (sys.argv[2].isnumeric()):
-    if (sys.argv[3].isnumeric()):
+archivo_txt = sys.argv[1]
+start_word = sys.argv[2]
+sentence_length = int(sys.argv[3])
+n_rep = int(sys.argv[3])
 
-        texto = sys.argv[1]
-        num_rep = int(sys.argv[2])
-        tipo = int(sys.argv[3])
+file = open(archivo_txt, 'rt')
+text = file.read()
+file.close()
 
-        if ((tipo==0) or (tipo==1)):
-            procesar(texto, num_rep, tipo)
-        else:
-            print("El tipo de salida de ser 1 o 0")
-    else:
-        print("El tipo de salida de ser un valor numerico")
-else:
-    print("El numero de repeticiones debe ser numero")
+procesar(text, start_word, n_rep, sentence_length)
