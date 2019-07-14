@@ -1,16 +1,12 @@
-#Import libraries.
 import sys
 import random
- 
- 
-def readdata(file):
-    '''Read file and return contents.'''
+
+def leer_archivo(file):    
     with open(file) as f:
         contents = f.read()
     return contents
  
- 
-def makerule(data, context):
+def proceso(data, context):
     '''Make a rule dict for given data.'''
     rule = {}
     words = data.split(' ')
@@ -27,7 +23,7 @@ def makerule(data, context):
     return rule
  
  
-def makestring(rule, length):    
+def concatenacion(rule, length):    
     '''Use a given rule to make a string.'''
     oldwords = random.choice(list(rule.keys())).split(' ') #random starting words
     string = ' '.join(oldwords) + ' '
@@ -48,7 +44,7 @@ def makestring(rule, length):
  
  
 if __name__ == '__main__':
-    data = readdata(sys.argv[1])
-    rule = makerule(data, int(sys.argv[2]))
-    string = makestring(rule, int(sys.argv[3]))
+    data = leer_archivo(sys.argv[1])
+    rule = proceso(data, int(sys.argv[2]))
+    string = concatenacion(rule, int(sys.argv[3]))
     print(string)
